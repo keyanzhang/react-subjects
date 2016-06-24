@@ -26,39 +26,37 @@ const componentType = PropTypes.oneOfType([
   PropTypes.func
 ])
 
-const PinnedToBottom = React.createClass({
-  propTypes: {
+class PinnedToBottom extends React.Component {
+  static propTypes = {
     component: componentType.isRequired,
     tolerance: PropTypes.number.isRequired
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      component: 'div',
-      tolerance: 10
-    }
-  },
+  static defaultProps = {
+    component: 'div',
+    tolerance: 10
+  };
 
   componentDidMount() {
     this.autoScroll = true
     this.scrollToBottom()
-  },
+  }
 
   componentWillUpdate() {
     const { clientHeight, scrollHeight, scrollTop } = findDOMNode(this)
     const distanceToBottom = scrollHeight - (clientHeight + scrollTop)
     this.autoScroll = distanceToBottom < this.props.tolerance
-  },
+  }
 
   componentDidUpdate() {
     if (this.autoScroll)
       this.scrollToBottom()
-  },
+  }
 
-  scrollToBottom() {
+  scrollToBottom = () => {
     const node = findDOMNode(this)
     node.scrollTop = node.scrollHeight
-  },
+  };
 
   render() {
     const { children, component, style } = this.props
@@ -68,32 +66,28 @@ const PinnedToBottom = React.createClass({
       children
     })
   }
-})
+}
 
-const Tail = React.createClass({
-  propTypes: {
+class Tail extends React.Component {
+  static propTypes = {
     lines: PropTypes.arrayOf(PropTypes.string).isRequired,
     n: PropTypes.number.isRequired
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      n: 15
-    }
-  },
+  static defaultProps = {
+    n: 15
+  };
 
   render() {
     const { children, lines, n } = this.props
     return children(lines.slice(-n))
   }
-})
+}
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      lines: []
-    }
-  },
+class App extends React.Component {
+  state = {
+    lines: []
+  };
 
   componentDidMount() {
     listen(newLines => {
@@ -101,7 +95,7 @@ const App = React.createClass({
         lines: this.state.lines.concat(newLines)
       })
     })
-  },
+  }
 
   render() {
     return (
@@ -123,6 +117,6 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 render(<App/>, document.getElementById('app'))

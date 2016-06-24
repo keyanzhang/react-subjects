@@ -56,14 +56,14 @@ const Modal = React.createClass({
   }
 })
 
-const App = React.createClass({
-  openModal() {
+class App extends React.Component {
+  openModal = () => {
     this.refs.modal.open()
-  },
+  };
 
-  closeModal() {
+  closeModal = () => {
     this.refs.modal.close()
-  },
+  };
 
   render() {
     return (
@@ -88,6 +88,6 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 render(<App/>, document.getElementById('app'))

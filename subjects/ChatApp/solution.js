@@ -14,12 +14,11 @@ const messageType = PropTypes.shape({
   text: PropTypes.string.isRequired
 })
 
-const MessageList = React.createClass({
-
-  propTypes: {
+class MessageList extends React.Component {
+  static propTypes = {
     auth: PropTypes.object.isRequired,
     messages: PropTypes.arrayOf(messageType).isRequired
-  },
+  };
 
   render() {
     const { auth, messages } = this.props
@@ -66,21 +65,17 @@ const MessageList = React.createClass({
       </ol>
     )
   }
+}
 
-})
-
-const Chat = React.createClass({
-
-  getInitialState() {
-    return {
-      auth: null,
-      messages: []
-    }
-  },
+class Chat extends React.Component {
+  state = {
+    auth: null,
+    messages: []
+  };
 
   componentWillMount() {
     this.pinToBottom = true
-  },
+  }
 
   componentDidMount() {
     login((error, auth) => {
@@ -90,21 +85,21 @@ const Chat = React.createClass({
         this.setState({ messages })
       })
     })
-  },
+  }
 
   componentDidUpdate() {
     if (this.pinToBottom)
       this.scrollToBottom()
-  },
+  }
 
-  scrollToBottom() {
+  scrollToBottom = () => {
     const node = this.refs.messages
 
     if (node)
       node.scrollTop = node.scrollHeight
-  },
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault()
 
     const input = this.refs.message
@@ -117,12 +112,12 @@ const Chat = React.createClass({
     // Always pin to bottom when we send
     // a new message from this window
     this.pinToBottom = true
-  },
+  };
 
-  handleScroll(event) {
+  handleScroll = event => {
     const { clientHeight, scrollTop, scrollHeight } = event.target
     this.pinToBottom = clientHeight + scrollTop > (scrollHeight - 10)
-  },
+  };
 
   render() {
     const { auth, messages } = this.state
@@ -148,7 +143,6 @@ const Chat = React.createClass({
       </div>
     )
   }
-
-})
+}
 
 render(<Chat/>, document.getElementById('app'))

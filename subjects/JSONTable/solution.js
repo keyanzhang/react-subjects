@@ -18,24 +18,20 @@ function isImageURL(content) {
   return isURL(content) && (/\.(jpe?g|gif|png)$/).test(content)
 }
 
-const JSONTable = React.createClass({
-  propTypes: {
+class JSONTable extends React.Component {
+  static propTypes = {
     src: React.PropTypes.string.isRequired,
     getData: React.PropTypes.func.isRequired,
     getKey: React.PropTypes.func.isRequired
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      getKey: (item) => item.id
-    }
-  },
+  static defaultProps = {
+    getKey: (item) => item.id
+  };
 
-  getInitialState() {
-    return {
-      data: null
-    }
-  },
+  state = {
+    data: null
+  };
 
   componentDidMount() {
     getJSON(this.props.src, (error, payload) => {
@@ -43,9 +39,9 @@ const JSONTable = React.createClass({
         data: this.props.getData(payload)
       })
     })
-  },
+  }
 
-  formatContent(content) {
+  formatContent = content => {
     if (Array.isArray(content))
       return content.map(this.formatContent)
 
@@ -56,7 +52,7 @@ const JSONTable = React.createClass({
       return <p><a key={content} href={content}>{content}</a></p>
 
     return content
-  },
+  };
 
   render() {
     const { data } = this.state
@@ -85,9 +81,9 @@ const JSONTable = React.createClass({
       </table>
     )
   }
-})
+}
 
-const App = React.createClass({
+class App extends React.Component {
   render() {
     return (
       <div>
@@ -106,6 +102,6 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 render(<App/>, document.getElementById('app'))

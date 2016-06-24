@@ -10,13 +10,13 @@ import React from 'react'
 import { render } from 'react-dom'
 import getJSON from './lib/getJSON'
 
-const JSONTable = React.createClass({
+class JSONTable extends React.Component {
   render() {
     return <div>...</div>
   }
-})
+}
 
-const App = React.createClass({
+class App extends React.Component {
   render() {
     return (
       <div>
@@ -28,6 +28,6 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 render(<App/>, document.getElementById('app'))

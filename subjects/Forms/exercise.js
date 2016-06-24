@@ -20,7 +20,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import serializeForm from 'form-serialize'
 
-const CheckoutForm = React.createClass({
+class CheckoutForm extends React.Component {
   render() {
     return (
       <div>
@@ -52,6 +52,6 @@ const CheckoutForm = React.createClass({
       </div>
     )
   }
-})
+}
 
 render(<CheckoutForm/>, document.getElementById('app'))

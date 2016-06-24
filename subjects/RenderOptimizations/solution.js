@@ -16,29 +16,31 @@ import { render, findDOMNode } from 'react-dom'
 import * as RainbowListDelegate from './RainbowListDelegate'
 import './styles'
 
-class RainbowList extends React.Component {
-  static propTypes = {
+const RainbowList = React.createClass({
+  propTypes: {
     numRows: PropTypes.number.isRequired,
     rowHeight: PropTypes.number.isRequired,
     renderRowAtIndex: PropTypes.func.isRequired
-  };
+  },
 
-  state = {
-    availableHeight: 0,
-    scrollTop: 0
-  };
+  getInitialState() {
+    return {
+      availableHeight: 0,
+      scrollTop: 0
+    }
+  },
 
   componentDidMount() {
     this.setState({
       availableHeight: findDOMNode(this).clientHeight
     })
-  }
+  },
 
-  handleScroll = event => {
+  handleScroll(event) {
     this.setState({
       scrollTop: event.target.scrollTop
     })
-  };
+  },
 
   render() {
     const { numRows, rowHeight, renderRowAtIndex } = this.props
@@ -66,7 +68,7 @@ class RainbowList extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(
   <RainbowList

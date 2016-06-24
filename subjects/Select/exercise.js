@@ -10,12 +10,12 @@ const { func, any } = PropTypes
 //
 // Make this work like a normal <select><option/></select>
 
-class Select extends React.Component {
-  static propTypes = {
+const Select = React.createClass({
+  propTypes: {
     onChange: func,
     value: any,
     defaultValue: any
-  };
+  },
 
   render() {
     return (
@@ -27,20 +27,23 @@ class Select extends React.Component {
       </div>
     )
   }
-}
+})
 
-class Option extends React.Component {
+
+const Option = React.createClass({
   render() {
     return (
       <div className="option">{this.props.children}</div>
     )
   }
-}
+})
 
-class App extends React.Component {
-  state = {
-    selectValue: 'dosa'
-  };
+const App = React.createClass({
+  getInitialState() {
+    return {
+      selectValue: 'dosa'
+    }
+  },
 
   render() {
     return (
@@ -73,6 +76,6 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<App/>, document.getElementById('app'))

@@ -8,17 +8,19 @@ const structure = immstruct.withHistory('app', {
   name: 'Drawing Pad'
 })
 
-class DrawingPad extends React.Component {
-  state = {
-    drawing: false
-  };
+const DrawingPad = React.createClass({
+  getInitialState() {
+    return {
+      drawing: false
+    }
+  },
 
-  maybeDraw = e => {
+  maybeDraw(e) {
     if (this.state.drawing)
       this.props.cursor.update('points', (points) => (
         points.push([ e.clientX, e.clientY ])
       ))
-  };
+  },
 
   render() {
     const points = this.props.cursor.get('points')
@@ -57,12 +59,12 @@ class DrawingPad extends React.Component {
       </div>
     )
   }
-}
+})
 
-class App extends React.Component {
-  handleSlider = e => {
+const App = React.createClass({
+  handleSlider(e) {
     setHistory(parseInt(e.target.value, 10))
-  };
+  },
 
   render() {
     const { struct } = this.props
@@ -86,7 +88,7 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 structure.on('swap', render)
 render()

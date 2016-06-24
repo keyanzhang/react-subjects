@@ -3,19 +3,26 @@ import React, { PropTypes } from 'react'
 import { render } from 'react-dom'
 import './styles.css'
 
-class Select extends React.Component {
-  static propTypes = {
+const Select = React.createClass({
+  propTypes: {
     onChange: PropTypes.func,
     value: PropTypes.any,
     defaultValue: PropTypes.any
-  };
+  },
+
+  getInitialState() {
+    return {
+      value: this.props.defaultValue || null,
+      showChildren: false
+    }
+  },
 
   componentWillMount() {
     if (!this.isUncontrolled() && !this.props.onChange)
       console.warn('This thing is gonna be read-only, etc. etc.')
-  }
+  },
 
-  getLabel = () => {
+  getLabel() {
     let label = null
 
     React.Children.forEach(this.props.children, (child) => {
@@ -30,19 +37,19 @@ class Select extends React.Component {
     })
 
     return label
-  };
+  },
 
-  toggle = () => {
+  toggle() {
     this.setState({
       showChildren: !this.state.showChildren
     })
-  };
+  },
 
-  isUncontrolled = () => {
+  isUncontrolled() {
     return this.props.value == null
-  };
+  },
 
-  handleSelect = value => {
+  handleSelect(value) {
     const nextState = { showChildren: false }
 
     if (this.isUncontrolled())
@@ -52,20 +59,15 @@ class Select extends React.Component {
       if (this.props.onChange)
         this.props.onChange(value)
     })
-  };
+  },
 
-  renderChildren = () => {
+  renderChildren() {
     return React.Children.map(this.props.children, (child) => (
       React.cloneElement(child, {
         onSelect: (value) => this.handleSelect(value)
       })
     ))
-  };
-
-  state = {
-    value: this.props.defaultValue || null,
-    showChildren: false
-  };
+  },
 
   render() {
     return (
@@ -79,12 +81,12 @@ class Select extends React.Component {
       </div>
     )
   }
-}
+})
 
-class Option extends React.Component {
-  handleClick = () => {
+const Option = React.createClass({
+  handleClick() {
     this.props.onSelect(this.props.value)
-  };
+  },
 
   render() {
     return (
@@ -94,16 +96,18 @@ class Option extends React.Component {
       >{this.props.children}</div>
     )
   }
-}
+})
 
-class App extends React.Component {
-  state = {
-    selectValue: 'dosa'
-  };
+const App = React.createClass({
+  getInitialState() {
+    return {
+      selectValue: 'dosa'
+    }
+  },
 
-  setToMintChutney = () => {
+  setToMintChutney() {
     this.setState({ selectValue: 'mint-chutney' })
-  };
+  },
 
   render() {
     return (
@@ -137,6 +141,6 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<App/>, document.getElementById('app'))

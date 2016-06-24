@@ -20,45 +20,45 @@
 import React, { PropTypes } from 'react'
 import { render } from 'react-dom'
 
-class Form extends React.Component {
-  static childContextTypes = {
+const Form = React.createClass({
+  childContextTypes: {
     onFormSubmit: PropTypes.func
-  };
+  },
 
   getChildContext() {
     return {
       onFormSubmit: this.props.onSubmit
     }
-  }
+  },
 
   render() {
     return <div>{this.props.children}</div>
   }
-}
+})
 
-class SubmitButton extends React.Component {
-  static contextTypes = {
+const SubmitButton = React.createClass({
+  contextTypes: {
     onFormSubmit: React.PropTypes.func
-  };
+  },
 
-  handleClick = () => {
+  handleClick() {
     this.context.onFormSubmit()
-  };
+  },
 
   render() {
     return <button onClick={this.handleClick}>{this.props.children}</button>
   }
-}
+})
 
-class TextInput extends React.Component {
-  static contextTypes = {
+const TextInput = React.createClass({
+  contextTypes: {
     onFormSubmit: React.PropTypes.func
-  };
+  },
 
-  handleKeyDown = event => {
+  handleKeyDown(event) {
     if (event.key === 'Enter' || event.key === 'Space')
       this.context.onFormSubmit()
-  };
+  },
 
   render() {
     return (
@@ -70,12 +70,12 @@ class TextInput extends React.Component {
       />
     )
   }
-}
+})
 
-class App extends React.Component {
-  handleSubmit = () => {
+const App = React.createClass({
+  handleSubmit() {
     alert('YOU WIN!')
-  };
+  },
 
   render() {
     return (
@@ -94,6 +94,6 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<App/>, document.getElementById('app'))

@@ -20,18 +20,19 @@ import { render } from 'react-dom'
 import * as styles from './lib/styles'
 import data from './lib/data'
 
-class Tabs extends React.Component {
-  static propTypes = {
+const Tabs = React.createClass({
+
+  propTypes: {
     activeTabIndex: React.PropTypes.number.isRequired,
     onActivate: React.PropTypes.func.isRequired,
     data: React.PropTypes.array.isRequired
-  };
+  },
 
-  handleTabClick = activeTabIndex => {
+  handleTabClick(activeTabIndex) {
     this.props.onActivate(activeTabIndex)
-  };
+  },
 
-  renderTabs = () => {
+  renderTabs() {
     return this.props.data.map((tab, index) => {
       const style = this.props.activeTabIndex === index ?
         styles.activeTab : styles.tab
@@ -44,16 +45,16 @@ class Tabs extends React.Component {
         >{tab.name}</div>
       )
     })
-  };
+  },
 
-  renderPanel = () => {
+  renderPanel() {
     const tab = this.props.data[this.props.activeTabIndex]
     return (
       <div>
         <p>{tab.description}</p>
       </div>
     )
-  };
+  },
 
   render() {
     return (
@@ -67,12 +68,16 @@ class Tabs extends React.Component {
       </div>
     )
   }
-}
 
-class App extends React.Component {
-  state = {
-    activeTabIndex: 0
-  };
+})
+
+const App = React.createClass({
+
+  getInitialState() {
+    return {
+      activeTabIndex: 0
+    }
+  },
 
   render() {
     return (
@@ -87,7 +92,8 @@ class App extends React.Component {
       </div>
     )
   }
-}
+
+})
 
 render(<App tabs={data}/>, document.getElementById('app'), function () {
   require('./tests').run(this)

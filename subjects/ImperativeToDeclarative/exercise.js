@@ -9,11 +9,12 @@ import { render, findDOMNode } from 'react-dom'
 import $ from 'jquery'
 import 'bootstrap-webpack'
 
-class Modal extends React.Component {
-  static propTypes = {
+const Modal = React.createClass({
+
+  propTypes: {
     title: PropTypes.string.isRequired,
     children: PropTypes.node
-  };
+  },
 
   render() {
     return (
@@ -31,16 +32,18 @@ class Modal extends React.Component {
       </div>
     )
   }
-}
 
-class App extends React.Component {
-  openModal = () => {
+})
+
+const App = React.createClass({
+
+  openModal() {
     $(findDOMNode(this.refs.modal)).modal('show')
-  };
+  },
 
-  closeModal = () => {
+  closeModal() {
     $(findDOMNode(this.refs.modal)).modal('hide')
-  };
+  },
 
   render() {
     return (
@@ -66,6 +69,7 @@ class App extends React.Component {
       </div>
     )
   }
-}
+
+})
 
 render(<App/>, document.getElementById('app'))

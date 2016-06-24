@@ -1,10 +1,12 @@
 import React from 'react'
 import ContentToggle from './ContentToggle'
 
-class StatefulContentToggle extends React.Component {
-  state = { isOpen: false };
+const StatefulContentToggle = React.createClass({
+  getInitialState() {
+    return { isOpen: false }
+  },
 
-  render() {
+  render () {
     return (
       <ContentToggle
         {...this.props}
@@ -13,6 +15,6 @@ class StatefulContentToggle extends React.Component {
       />
     )
   }
-}
+})
 
 export default StatefulContentToggle

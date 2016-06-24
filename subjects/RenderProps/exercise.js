@@ -21,7 +21,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { listen } from './utils/log'
 
-class Tail extends React.Component {
+const Tail = React.createClass({
   render() {
     const { lines } = this.props
 
@@ -33,12 +33,14 @@ class Tail extends React.Component {
       </ul>
     )
   }
-}
+})
 
-class App extends React.Component {
-  state = {
-    lines: []
-  };
+const App = React.createClass({
+  getInitialState() {
+    return {
+      lines: []
+    }
+  },
 
   componentDidMount() {
     listen(newLines => {
@@ -46,7 +48,7 @@ class App extends React.Component {
         lines: this.state.lines.concat(newLines)
       })
     })
-  }
+  },
 
   render() {
     return (
@@ -58,6 +60,6 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<App/>, document.getElementById('app'))

@@ -38,7 +38,7 @@ function getUserByID(id) {
   return null
 }
 
-class App extends React.Component {
+const App = React.createClass({
   render() {
     return (
       <div>
@@ -47,9 +47,9 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
-class Home extends React.Component {
+const Home = React.createClass({
   render() {
     const contactItems = USERS.map(user => (
       <li key={user.email}>
@@ -64,9 +64,9 @@ class Home extends React.Component {
       </div>
     )
   }
-}
+})
 
-class Profile extends React.Component {
+const Profile = React.createClass({
   render() {
     const { userID } = this.props.params
     const user = getUserByID(userID)
@@ -80,13 +80,13 @@ class Profile extends React.Component {
       </div>
     )
   }
-}
+})
 
-class NoMatch extends React.Component {
+const NoMatch = React.createClass({
   render() {
     return <h1>No routes matched</h1>
   }
-}
+})
 
 ReactDOM.render((
   <Router history={hashHistory}>

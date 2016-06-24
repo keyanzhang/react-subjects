@@ -1,17 +1,19 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-class ContentToggle extends React.Component {
-  state = {
-    isOpen: false
-  };
+const ContentToggle = React.createClass({
+  getInitialState() {
+    return {
+      isOpen: false
+    }
+  },
 
-  handleClick = () => {
+  handleClick() {
     this.setState({ isOpen: !this.state.isOpen }, () => {
       if (this.props.onToggle)
         this.props.onToggle(this.state.isOpen)
     })
-  };
+  },
 
   render() {
     let summaryClassName = 'ContentToggle__Summary'
@@ -30,16 +32,18 @@ class ContentToggle extends React.Component {
       </div>
     )
   }
-}
+})
 
-class App extends React.Component {
-  state = {
-    tacos: [
-      { id: 0, name: 'Carnitas', src: 'tacos/carnitas.png' },
-      { id: 1, name: 'Pollo', src: 'tacos/pollo.png' },
-      { id: 2, name: 'Asada', src: 'tacos/asada.png' }
-    ]
-  };
+const App = React.createClass({
+  getInitialState() {
+    return {
+      tacos: [
+        { id: 0, name: 'Carnitas', src: 'tacos/carnitas.png' },
+        { id: 1, name: 'Pollo', src: 'tacos/pollo.png' },
+        { id: 2, name: 'Asada', src: 'tacos/asada.png' }
+      ]
+    }
+  },
 
   render() {
     return (
@@ -64,7 +68,7 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<App/>, document.getElementById('app'))
 

@@ -6,18 +6,18 @@ const transparentGif = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAA
 const generateId = () =>
   Math.random().toString(36).substring(7)
 
-class CreateContactForm extends React.Component {
-  static propTypes = {
+const CreateContactForm = React.createClass({
+  propTypes: {
     onCreate: React.PropTypes.func.isRequired
-  };
+  },
 
-  handleSubmit = event => {
+  handleSubmit(event) {
     event.preventDefault()
     const contact = serializeForm(event.target, { hash: true })
     contact.id = generateId()
     this.props.onCreate(contact)
     event.target.reset()
-  };
+  },
 
   render() {
     return (
@@ -30,6 +30,6 @@ class CreateContactForm extends React.Component {
       </form>
     )
   }
-}
+})
 
 export default CreateContactForm

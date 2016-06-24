@@ -43,7 +43,8 @@ unsubscribe() // stop listening for new messages
 The world is your oyster!
 */
 
-class Chat extends React.Component {
+const Chat = React.createClass({
+
   render() {
     return (
       <div className="chat">
@@ -99,6 +100,7 @@ class Chat extends React.Component {
       </div>
     )
   }
-}
+
+})
 
 render(<Chat/>, document.getElementById('app'))

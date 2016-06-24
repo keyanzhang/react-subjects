@@ -1,16 +1,20 @@
 import React, { PropTypes } from 'react'
 import CreateContactForm from './CreateContactForm'
 
-class App extends React.Component {
-  state = {
-    contacts: [ { id: 'ryan', first: 'Ryan', last: 'Florence', avatar: 'http://ryanflorence.com/jsconf-avatars/avatars/ryan.jpg' } ]
-  };
+const App = React.createClass({
 
-  handleCreateContact = contact => {
+  getInitialState() {
+    return {
+      contacts: [ { id: 'ryan', first: 'Ryan', last: 'Florence', avatar: 'http://ryanflorence.com/jsconf-avatars/avatars/ryan.jpg' } ]
+    }
+  },
+
+
+  handleCreateContact(contact) {
     this.setState({
       contacts: this.state.contacts.concat([ contact ])
     })
-  };
+  },
 
   render() {
     return (
@@ -30,7 +34,7 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 export default App
 

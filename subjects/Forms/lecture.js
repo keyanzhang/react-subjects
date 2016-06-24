@@ -5,7 +5,7 @@ import serializeForm from 'form-serialize'
 ////////////////////////////////////////////////////////////////////////////////
 // Here's a simple <form>:
 
-class Forms extends React.Component {
+const Forms = React.createClass({
   render() {
     return (
       <div>
@@ -16,7 +16,7 @@ class Forms extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<Forms/>, document.getElementById('app'))
 

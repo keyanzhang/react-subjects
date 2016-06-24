@@ -7,16 +7,18 @@ import './styles'
 ///////////////////////////////////////////////////////////////////////////////
 // Let's create a simple toggle switch that moves back and forth.
 
-class ToggleSwitch extends React.Component {
-  state = {
-    isActive: false
-  };
+const ToggleSwitch = React.createClass({
+  getInitialState() {
+    return {
+      isActive: false
+    }
+  },
 
-  toggle = () => {
+  toggle() {
     this.setState({
       isActive: !this.state.isActive
     })
-  };
+  },
 
   render() {
     const x = this.state.isActive ? 400 : 0
@@ -27,7 +29,7 @@ class ToggleSwitch extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<ToggleSwitch/>, document.getElementById('app'))
 

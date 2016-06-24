@@ -9,25 +9,25 @@ const messages = [
 ////////////////////////////////////////////////////////////////////////////////
 // Let's build a page without ReactRouter
 
-const About = React.createClass({
+class About extends React.Component {
   render() {
     return <h2>About</h2>
   }
-})
+}
 
-const Inbox = React.createClass({
+class Inbox extends React.Component {
   render() {
     return <h2>Inbox</h2>
   }
-})
+}
 
-const Home = React.createClass({
+class Home extends React.Component {
   render() {
     return <h2>Home</h2>
   }
-})
+}
 
-const App = React.createClass({
+class App extends React.Component {
   render() {
     return (
       <div>
@@ -35,7 +35,7 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 ReactDOM.render(<App/>, document.getElementById('app'))
 

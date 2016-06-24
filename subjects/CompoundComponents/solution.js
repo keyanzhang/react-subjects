@@ -32,7 +32,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-const RadioIcon = React.createClass({
+class RadioIcon extends React.Component {
   render() {
     return (
       <div
@@ -49,20 +49,18 @@ const RadioIcon = React.createClass({
       />
     )
   }
-})
+}
 
-const RadioGroup = React.createClass({
-  getInitialState() {
-    return {
-      value: this.props.defaultValue
-    }
-  },
-
-  select(value) {
+class RadioGroup extends React.Component {
+  select = value => {
     this.setState({ value }, () => {
       this.props.onChange(this.state.value)
     })
-  },
+  };
+
+  state = {
+    value: this.props.defaultValue
+  };
 
   render() {
     const children = React.Children.map(this.props.children, (child) => (
@@ -74,9 +72,9 @@ const RadioGroup = React.createClass({
 
     return <div>{children}</div>
   }
-})
+}
 
-const RadioOption = React.createClass({
+class RadioOption extends React.Component {
   render() {
     return (
       <div onClick={this.props.onClick}>
@@ -84,14 +82,12 @@ const RadioOption = React.createClass({
       </div>
     )
   }
-})
+}
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      radioValue: 'fm'
-    }
-  },
+class App extends React.Component {
+  state = {
+    radioValue: 'fm'
+  };
 
   render() {
     return (
@@ -112,6 +108,6 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 render(<App/>, document.getElementById('app'))

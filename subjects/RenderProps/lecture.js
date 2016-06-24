@@ -10,24 +10,22 @@ const DefaultFetchURL = 'https://api.github.com/search/repositories?q=react&sort
 // Here's a fun app, check out ScrollBottomNotifier, making these kinds of tasks
 // declarative is fantastic and makes code reuse really straightforward.
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      fetching: false,
-      repos: [],
-      links: {}
-    }
-  },
+class App extends React.Component {
+  state = {
+    fetching: false,
+    repos: [],
+    links: {}
+  };
 
   componentDidMount() {
     this.fetch(DefaultFetchURL)
-  },
+  }
 
-  fetchNextPage() {
+  fetchNextPage = () => {
     this.fetch(this.state.links.next)
-  },
+  };
 
-  fetch(url) {
+  fetch = url => {
     this.setState({ fetching: true })
 
     searchGitHubRepos(url, (err, repos, links) => {
@@ -37,7 +35,7 @@ const App = React.createClass({
         links
       })
     })
-  },
+  };
 
   render() {
     const canFetch = !this.state.fetching && this.state.links.next
@@ -60,7 +58,7 @@ const App = React.createClass({
       </ScrollBottomNotifier>
     )
   }
-})
+}
 
 render(<App/>, document.getElementById('app'))
 

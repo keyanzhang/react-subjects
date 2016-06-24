@@ -25,22 +25,20 @@ styles.panel = {
   padding: 10
 }
 
-const Tabs = React.createClass({
-  propTypes: {
+class Tabs extends React.Component {
+  static propTypes = {
     data: PropTypes.arrayOf(tabType)
-  },
+  };
 
-  getInitialState() {
-    return {
-      activeTabIndex: 0
-    }
-  },
+  state = {
+    activeTabIndex: 0
+  };
 
-  selectTabIndex(activeTabIndex) {
+  selectTabIndex = activeTabIndex => {
     this.setState({
       activeTabIndex
     })
-  },
+  };
 
   render() {
     const { data } = this.props
@@ -72,6 +70,6 @@ const Tabs = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default Tabs

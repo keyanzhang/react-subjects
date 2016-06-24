@@ -9,37 +9,32 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-const withMousePosition = (Component) => {
-  return React.createClass({
-    getInitialState() {
-      return { x: 0, y: 0 }
-    },
+class withMousePosition extends React.Component {
+  state = { x: 0, y: 0 };
 
-    handleMouseMove(event) {
-      this.setState({
-        x: event.clientX,
-        y: event.clientY
-      })
-    },
+  handleMouseMove = event => {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    })
+  };
 
-    render() {
-      return (
-        <div onMouseMove={this.handleMouseMove}>
-          <Component {...this.props} mouse={this.state}/>
-        </div>
-      )
-    }
-  })
+  render() {
+    return (
+      <div onMouseMove={this.handleMouseMove}>
+        <Component {...this.props} mouse={this.state}/>
+      </div>
+    )
+  }
 }
 
-const App = React.createClass({
-
-  propTypes: {
+class App extends React.Component {
+  static propTypes = {
     mouse: React.PropTypes.shape({
       x: React.PropTypes.number.isRequired,
       y: React.PropTypes.number.isRequired
     }).isRequired
-  },
+  };
 
   render() {
     return (
@@ -49,8 +44,7 @@ const App = React.createClass({
       </div>
     )
   }
-
-})
+}
 
 const AppWithMouse = withMousePosition(App)
 

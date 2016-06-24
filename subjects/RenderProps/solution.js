@@ -26,37 +26,39 @@ const componentType = PropTypes.oneOfType([
   PropTypes.func
 ])
 
-class PinnedToBottom extends React.Component {
-  static propTypes = {
+const PinnedToBottom = React.createClass({
+  propTypes: {
     component: componentType.isRequired,
     tolerance: PropTypes.number.isRequired
-  };
+  },
 
-  static defaultProps = {
-    component: 'div',
-    tolerance: 10
-  };
+  getDefaultProps() {
+    return {
+      component: 'div',
+      tolerance: 10
+    }
+  },
 
   componentDidMount() {
     this.autoScroll = true
     this.scrollToBottom()
-  }
+  },
 
   componentWillUpdate() {
     const { clientHeight, scrollHeight, scrollTop } = findDOMNode(this)
     const distanceToBottom = scrollHeight - (clientHeight + scrollTop)
     this.autoScroll = distanceToBottom < this.props.tolerance
-  }
+  },
 
   componentDidUpdate() {
     if (this.autoScroll)
       this.scrollToBottom()
-  }
+  },
 
-  scrollToBottom = () => {
+  scrollToBottom() {
     const node = findDOMNode(this)
     node.scrollTop = node.scrollHeight
-  };
+  },
 
   render() {
     const { children, component, style } = this.props
@@ -66,28 +68,32 @@ class PinnedToBottom extends React.Component {
       children
     })
   }
-}
+})
 
-class Tail extends React.Component {
-  static propTypes = {
+const Tail = React.createClass({
+  propTypes: {
     lines: PropTypes.arrayOf(PropTypes.string).isRequired,
     n: PropTypes.number.isRequired
-  };
+  },
 
-  static defaultProps = {
-    n: 15
-  };
+  getDefaultProps() {
+    return {
+      n: 15
+    }
+  },
 
   render() {
     const { children, lines, n } = this.props
     return children(lines.slice(-n))
   }
-}
+})
 
-class App extends React.Component {
-  state = {
-    lines: []
-  };
+const App = React.createClass({
+  getInitialState() {
+    return {
+      lines: []
+    }
+  },
 
   componentDidMount() {
     listen(newLines => {
@@ -95,7 +101,7 @@ class App extends React.Component {
         lines: this.state.lines.concat(newLines)
       })
     })
-  }
+  },
 
   render() {
     return (
@@ -117,6 +123,6 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<App/>, document.getElementById('app'))

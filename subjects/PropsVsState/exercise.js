@@ -20,20 +20,23 @@ import { render } from 'react-dom'
 import * as styles from './lib/styles'
 import data from './lib/data'
 
-class Tabs extends React.Component {
-  static propTypes = {
+const Tabs = React.createClass({
+
+  propTypes: {
     data: React.PropTypes.array.isRequired
-  };
+  },
 
-  state = {
-    activeTabIndex: 0
-  };
+  getInitialState() {
+    return {
+      activeTabIndex: 0
+    }
+  },
 
-  handleTabClick = activeTabIndex => {
+  handleTabClick(activeTabIndex) {
     this.setState({ activeTabIndex })
-  };
+  },
 
-  renderTabs = () => {
+  renderTabs() {
     return this.props.data.map((tab, index) => {
       const style = this.state.activeTabIndex === index ?
         styles.activeTab : styles.tab
@@ -46,16 +49,16 @@ class Tabs extends React.Component {
         >{tab.name}</div>
       )
     })
-  };
+  },
 
-  renderPanel = () => {
+  renderPanel() {
     const tab = this.props.data[this.state.activeTabIndex]
     return (
       <div>
         <p>{tab.description}</p>
       </div>
     )
-  };
+  },
 
   render() {
     return (
@@ -69,9 +72,11 @@ class Tabs extends React.Component {
       </div>
     )
   }
-}
 
-class App extends React.Component {
+})
+
+const App = React.createClass({
+
   render() {
     return (
       <div>
@@ -80,7 +85,8 @@ class App extends React.Component {
       </div>
     )
   }
-}
+
+})
 
 render(<App tabs={data}/>, document.getElementById('app'), function () {
   require('./tests').run(this)

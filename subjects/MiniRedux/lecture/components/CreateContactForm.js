@@ -7,18 +7,19 @@ function generateId() {
   return Math.random().toString(36).substring(7)
 }
 
-class CreateContactForm extends React.Component {
-  static propTypes = {
-    onCreate: React.PropTypes.func.isRequired
-  };
+const CreateContactForm = React.createClass({
 
-  handleSubmit = event => {
+  propTypes: {
+    onCreate: React.PropTypes.func.isRequired
+  },
+
+  handleSubmit(event) {
     event.preventDefault()
     const contact = serializeForm(event.target, { hash: true })
     contact.id = generateId()
     this.props.onCreate(contact)
     event.target.reset()
-  };
+  },
 
   render() {
     return (
@@ -31,7 +32,7 @@ class CreateContactForm extends React.Component {
       </form>
     )
   }
-}
+})
 
 export default CreateContactForm
 

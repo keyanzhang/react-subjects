@@ -20,19 +20,19 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-class Form extends React.Component {
+const Form = React.createClass({
   render() {
     return <div>{this.props.children}</div>
   }
-}
+})
 
-class SubmitButton extends React.Component {
+const SubmitButton = React.createClass({
   render() {
     return <button>{this.props.children}</button>
   }
-}
+})
 
-class TextInput extends React.Component {
+const TextInput = React.createClass({
   render() {
     return (
       <input
@@ -42,12 +42,12 @@ class TextInput extends React.Component {
       />
     )
   }
-}
+})
 
-class App extends React.Component {
-  handleSubmit = () => {
+const App = React.createClass({
+  handleSubmit() {
     alert('YOU WIN!')
-  };
+  },
 
   render() {
     return (
@@ -66,6 +66,6 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<App/>, document.getElementById('app'))

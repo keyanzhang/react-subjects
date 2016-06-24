@@ -34,7 +34,7 @@ styles.panel = {
   padding: 10
 }
 
-class Tabs extends React.Component {
+const Tabs = React.createClass({
   render() {
     return (
       <div className="Tabs">
@@ -50,9 +50,9 @@ class Tabs extends React.Component {
       </div>
     )
   }
-}
+})
 
-class App extends React.Component {
+const App = React.createClass({
   render() {
     return (
       <div>
@@ -61,7 +61,7 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 const DATA = [
   { id: 1, name: 'USA', description: 'Land of the Free, Home of the brave' },

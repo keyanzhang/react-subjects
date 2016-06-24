@@ -12,7 +12,7 @@ import * as styles from './styles'
 // We could recursively check children with each render, which seems like a bad
 // plan, so instead we can use a feature called "context".
 
-class TabList extends React.Component {
+const TabList = React.createClass({
   render() {
     const children = React.Children.map(this.props.children, (child, index) => {
       return React.cloneElement(child, {
@@ -22,9 +22,9 @@ class TabList extends React.Component {
     })
     return <div style={styles.tabs}>{children}</div>
   }
-}
+})
 
-class Tab extends React.Component {
+const Tab = React.createClass({
   render() {
     return (
       <div
@@ -37,9 +37,9 @@ class Tab extends React.Component {
       </div>
     )
   }
-}
+})
 
-class TabPanels extends React.Component {
+const TabPanels = React.createClass({
   render() {
     return (
       <div style={styles.tabPanels}>
@@ -47,18 +47,20 @@ class TabPanels extends React.Component {
       </div>
     )
   }
-}
+})
 
-class TabPanel extends React.Component {
+const TabPanel = React.createClass({
   render() {
     return <div>{this.props.children}</div>
   }
-}
+})
 
-class Tabs extends React.Component {
-  state = {
-    activeIndex: 0
-  };
+const Tabs = React.createClass({
+  getInitialState() {
+    return {
+      activeIndex: 0
+    }
+  },
 
   render() {
     const children = React.Children.map(this.props.children, (child, index) => {
@@ -80,10 +82,10 @@ class Tabs extends React.Component {
 
     return <div>{children}</div>
   }
-}
+})
 
-class App extends React.Component {
-  render() {
+const App = React.createClass({
+  render () {
     return (
       <div>
         <Tabs>
@@ -108,7 +110,7 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<App/>, document.getElementById('app'))
 

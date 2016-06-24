@@ -3,81 +3,85 @@ import { render } from 'react-dom'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import './styles.css'
 
-class Slider extends React.Component {
-  static propTypes = {
+const Slider = React.createClass({
+  propTypes: {
     initialIndex: PropTypes.number.isRequired,
     autoplay: PropTypes.bool,
     onTogglePlay: PropTypes.func,
     duration: PropTypes.number
-  };
+  },
 
-  static defaultProps = {
-    autoplay: false,
-    duration: 5000,
-    initialIndex: 0
-  };
+  getDefaultProps() {
+    return {
+      autoplay: false,
+      duration: 5000,
+      initialIndex: 0
+    }
+  },
 
   render() {
     return (
       <div {...this.props}/>
     )
   }
-}
+})
 
-class SliderStage extends React.Component {
+const SliderStage = React.createClass({
   render() {
     return (
       <div {...this.props}/>
     )
   }
-}
+})
 
-class Slide extends React.Component {
+const Slide = React.createClass({
   render() {
     return <img {...this.props}/>
   }
-}
+})
 
-class SliderControls extends React.Component {
+const SliderControls = React.createClass({
   render() {
     return (
       <div {...this.props}/>
     )
   }
-}
+})
 
-class SliderPrevious extends React.Component {
+const SliderPrevious = React.createClass({
   render() {
     return (
       <button {...this.props}/>
     )
   }
-}
+})
 
-class SliderPlayPause extends React.Component {
+const SliderPlayPause = React.createClass({
   render() {
     return (
       <button {...this.props}/>
     )
   }
-}
+})
 
-class SliderNext extends React.Component {
-  static contextTypes = {
+const SliderNext = React.createClass({
+  contextTypes: {
     next: PropTypes.func.isRequired
-  };
+  },
 
   render() {
     return (
       <button {...this.props}/>
     )
   }
-}
+})
 
-class App extends React.Component {
-  state = {
-    isPlaying: true
-  };
+const App = React.createClass({
+  getInitialState() {
+    return {
+      isPlaying: true
+    }
+  },
 
   render() {
     return (
@@ -105,6 +109,6 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<App/>, document.getElementById('app'))

@@ -16,12 +16,12 @@ import { render, findDOMNode } from 'react-dom'
 import * as RainbowListDelegate from './RainbowListDelegate'
 import './styles'
 
-class ListView extends React.Component {
-  static propTypes = {
+const ListView = React.createClass({
+  propTypes: {
     numRows: PropTypes.number.isRequired,
     rowHeight: PropTypes.number.isRequired,
     renderRowAtIndex: PropTypes.func.isRequired
-  };
+  },
 
   render() {
     const { numRows, rowHeight, renderRowAtIndex } = this.props
@@ -43,7 +43,7 @@ class ListView extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(
   <ListView

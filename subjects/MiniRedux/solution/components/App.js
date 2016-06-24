@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react'
 import connect from '../mini-redux/connect'
 
-class App extends React.Component {
-  increment = () => {
+const App = React.createClass({
+  increment() {
     this.props.dispatch({ type: 'INCREMENT' })
-  };
+  },
 
-  decrement = () => {
+  decrement() {
     this.props.dispatch({ type: 'DECREMENT' })
-  };
+  },
 
   render() {
     return (
@@ -20,7 +20,7 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 
 export default connect((state) => {

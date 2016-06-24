@@ -11,28 +11,32 @@ import { easingTypes, Mixin as TweenStateMixin } from 'react-tween-state'
 
 require('./styles')
 
-class ToggleSwitch extends React.Component {
-  static propTypes = {
+const ToggleSwitch = React.createClass({
+  propTypes: {
     animationDuration: PropTypes.number
-  };
+  },
 
-  static defaultProps = {
-    animationDuration: 350
-  };
+  getDefaultProps() {
+    return {
+      animationDuration: 350
+    }
+  },
 
-  state = {
-    knobLeft: 0
-  };
+  getInitialState() {
+    return {
+      knobLeft: 0
+    }
+  },
 
-  toggle = () => {
+  toggle() {
     this.setState({
       knobLeft: this.state.knobLeft === 0 ? 400 : 0
     })
-  };
+  },
 
-  handleClick = () => {
+  handleClick() {
     this.toggle()
-  };
+  },
 
   render() {
     const knobStyle = {
@@ -46,6 +50,6 @@ class ToggleSwitch extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<ToggleSwitch/>, document.getElementById('app'))

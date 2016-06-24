@@ -9,13 +9,13 @@ import { render, findDOMNode } from 'react-dom'
 import $ from 'jquery'
 import 'bootstrap-webpack'
 
-class Modal extends React.Component {
-  static propTypes = {
+const Modal = React.createClass({
+  propTypes: {
     isOpen: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
     onClose: PropTypes.func,
     children: PropTypes.node
-  };
+  },
 
   componentDidMount() {
     this.doImperativeWork()
@@ -27,20 +27,20 @@ class Modal extends React.Component {
       if (this.props.onClose)
         this.props.onClose()
     })
-  }
+  },
 
   componentDidUpdate(prevProps) {
     if (prevProps.isOpen !== this.props.isOpen)
       this.doImperativeWork()
-  }
+  },
 
-  doImperativeWork = () => {
+  doImperativeWork() {
     if (this.props.isOpen === true) {
       $(findDOMNode(this)).modal('show')
     } else {
       $(findDOMNode(this)).modal('hide')
     }
-  };
+  },
 
   render() {
     return (
@@ -58,20 +58,22 @@ class Modal extends React.Component {
       </div>
     )
   }
-}
+})
 
-class App extends React.Component {
-  state = {
-    isModalOpen: false
-  };
+const App = React.createClass({
+  getInitialState() {
+    return {
+      isModalOpen: false
+    }
+  },
 
-  openModal = () => {
+  openModal() {
     this.setState({ isModalOpen: true })
-  };
+  },
 
-  closeModal = () => {
+  closeModal() {
     this.setState({ isModalOpen: false })
-  };
+  },
 
   render() {
     return (
@@ -101,6 +103,6 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 render(<App/>, document.getElementById('app'))

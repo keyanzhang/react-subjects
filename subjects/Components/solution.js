@@ -45,21 +45,20 @@ styles.panel = {
   padding: 10
 }
 
-class Tabs extends React.Component {
-  static propTypes = {
+const Tabs = React.createClass({
+  propTypes: {
     data: PropTypes.arrayOf(tabType)
-  };
-
-  state = {
-    activeTabIndex: 0
-  };
-
-  selectTabIndex = activeTabIndex => {
+  },
+  getInitialState() {
+    return {
+      activeTabIndex: 0
+    }
+  },
+  selectTabIndex(activeTabIndex) {
     this.setState({
       activeTabIndex
     })
-  };
-
+  },
   render() {
     const { data } = this.props
     const { activeTabIndex } = this.state
@@ -90,13 +89,12 @@ class Tabs extends React.Component {
       </div>
     )
   }
-}
+})
 
-class App extends React.Component {
-  static propTypes = {
+const App = React.createClass({
+  propTypes: {
     countries: PropTypes.arrayOf(countryType).isRequired
-  };
-
+  },
   render() {
     const data = this.props.countries.map(country => ({
       label: country.name,
@@ -110,7 +108,7 @@ class App extends React.Component {
       </div>
     )
   }
-}
+})
 
 const DATA = [
   { id: 1, name: 'USA', description: 'Land of the Free, Home of the brave' },

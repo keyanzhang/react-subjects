@@ -58,10 +58,10 @@ const TweenToggleSwitch = React.createClass({
   }
 })
 
-const SpringToggleSwitch = React.createClass({
-  propTypes: {
+class SpringToggleSwitch extends React.Component {
+  static propTypes = {
     isActive: PropTypes.bool.isRequired
-  },
+  };
 
   render() {
     const x = this.props.isActive ? 400 : 0
@@ -79,24 +79,22 @@ const SpringToggleSwitch = React.createClass({
       </Motion>
     )
   }
-})
+}
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      isActive: false
-    }
-  },
+class App extends React.Component {
+  state = {
+    isActive: false
+  };
 
-  toggle() {
+  toggle = () => {
     this.setState({
       isActive: !this.state.isActive
     })
-  },
+  };
 
-  handleClick() {
+  handleClick = () => {
     this.toggle()
-  },
+  };
 
   render() {
     return (
@@ -107,6 +105,6 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 render(<App/>, document.getElementById('app'))

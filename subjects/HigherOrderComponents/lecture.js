@@ -7,22 +7,20 @@ const media = createMediaListener({
   tiny: '(max-width: 400px)'
 })
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      media: media.getState()
-    }
-  },
+class App extends React.Component {
+  state = {
+    media: media.getState()
+  };
 
   componentDidMount() {
     media.listen((media) => {
       this.setState({ media })
     })
-  },
+  }
 
   componentWillUnmount() {
     media.dispose()
-  },
+  }
 
   render() {
     const { media } = this.state
@@ -35,7 +33,7 @@ const App = React.createClass({
       <h3>Meh...</h3>
     )
   }
-})
+}
 
 render(<App/>, document.getElementById('app'))
 

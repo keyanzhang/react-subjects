@@ -5,16 +5,16 @@ import * as styles from './lib/styles'
 ////////////////////////////////////////////////////////////////////////////////
 // Let's make some tabs...
 
-const Tabs = React.createClass({
-  getInitialState() {
-    return {
-      activeIndex: 0
-    }
-  },
-  selectTabIndex(activeIndex) {
+class Tabs extends React.Component {
+  state = {
+    activeIndex: 0
+  };
+
+  selectTabIndex = activeIndex => {
     this.setState({ activeIndex })
-  },
-  renderTabs() {
+  };
+
+  renderTabs = () => {
     return this.props.data.map((tab, index) => {
       const isActive = this.state.activeIndex === index
       return (
@@ -25,15 +25,17 @@ const Tabs = React.createClass({
         >{tab.label}</div>
       )
     })
-  },
-  renderPanel() {
+  };
+
+  renderPanel = () => {
     const tab = this.props.data[this.state.activeIndex]
     return (
       <div>
         <p>{tab.description}</p>
       </div>
     )
-  },
+  };
+
   render() {
     return (
       <div>
@@ -46,9 +48,9 @@ const Tabs = React.createClass({
       </div>
     )
   }
-})
+}
 
-const App = React.createClass({
+class App extends React.Component {
   render() {
     const tabData = [
       {
@@ -71,7 +73,7 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 render(<App/>, document.getElementById('app'))
 

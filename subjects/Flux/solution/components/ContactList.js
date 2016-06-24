@@ -2,35 +2,33 @@ import React from 'react'
 import ContactStore from '../stores/ContactStore'
 import ViewActions from '../actions/ViewActionCreators'
 
-const ContactList = React.createClass({
+class ContactList extends React.Component {
+  static defaultProps = {
+    ContactStore,
+    ViewActions
+  };
 
-  getDefaultProps() {
-    return {
-      ContactStore,
-      ViewActions
-    }
-  },
+  constructor(props) {
+    super(props);
+    this.state = props.ContactStore.getState();
+  }
 
-  getInitialState() {
-    return this.props.ContactStore.getState()
-  },
-
-  handleChange() {
+  handleChange = () => {
     this.setState(this.props.ContactStore.getState())
-  },
+  };
 
   componentDidMount() {
     this.props.ContactStore.addChangeListener(this.handleChange)
     this.props.ViewActions.loadContacts()
-  },
+  }
 
   componentWillUnmount() {
     this.props.ContactStore.removeChangeListener(this.handleChange)
-  },
+  }
 
-  deleteContact(contact) {
+  deleteContact = contact => {
     this.props.ViewActions.deleteContact(contact)
-  },
+  };
 
   render() {
     const { contacts, deletingContacts, errors, loaded } = this.state
@@ -60,6 +58,6 @@ const ContactList = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default ContactList

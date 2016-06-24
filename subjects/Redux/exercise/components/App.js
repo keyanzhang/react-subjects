@@ -3,19 +3,19 @@ import CreateContactForm from './CreateContactForm'
 import { connect } from 'react-redux'
 import { addContact, loadContacts } from '../actions/contacts'
 
-const App = React.createClass({
-  propTypes: {
+class App extends React.Component {
+  static propTypes = {
     dispatch: PropTypes.func.isRequired,
     contacts: PropTypes.array.isRequired
-  },
+  };
 
-  handleCreateContact(contact) {
+  handleCreateContact = contact => {
     this.props.dispatch(addContact(contact))
-  },
+  };
 
   componentDidMount() {
     loadContacts(this.props.dispatch)
-  },
+  }
 
   render() {
     return (
@@ -33,7 +33,7 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default connect((state) => {
   return {

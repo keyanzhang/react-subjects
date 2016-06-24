@@ -20,22 +20,20 @@ import React from 'react'
 import { render } from 'react-dom'
 import serializeForm from 'form-serialize'
 
-const CheckoutForm = React.createClass({
-  getInitialState() {
-    return {
-      billingName: 'Jane Doe',
-      billingState: 'WA',
-      shippingName: '',
-      shippingState: '',
-      shippingIsBilling: false
-    }
-  },
+class CheckoutForm extends React.Component {
+  state = {
+    billingName: 'Jane Doe',
+    billingState: 'WA',
+    shippingName: '',
+    shippingState: '',
+    shippingIsBilling: false
+  };
 
-  handleCheckboxChange(event) {
+  handleCheckboxChange = event => {
     this.setState({
       shippingIsBilling: event.target.checked
     })
-  },
+  };
 
   render() {
     const {
@@ -99,6 +97,6 @@ const CheckoutForm = React.createClass({
       </div>
     )
   }
-})
+}
 
 render(<CheckoutForm/>, document.getElementById('app'))

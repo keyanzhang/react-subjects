@@ -3,14 +3,12 @@ import { render } from 'react-dom'
 import TransitionGroup from 'react-addons-transition-group'
 import HeightFader from './components/HeightFader'
 
-const List = React.createClass({
-  getInitialState() {
-    return {
-      items: []
-    }
-  },
+class List extends React.Component {
+  state = {
+    items: []
+  };
 
-  addItem(e) {
+  addItem = e => {
     if (e.key === 'Enter') {
       if (this.guid == null)
         this.guid = 1
@@ -26,13 +24,13 @@ const List = React.createClass({
 
       e.target.value = ''
     }
-  },
+  };
 
-  removeItem(item) {
+  removeItem = item => {
     this.setState({
       items: this.state.items.filter(i => i !== item)
     })
-  },
+  };
 
   render() {
     return (
@@ -49,9 +47,9 @@ const List = React.createClass({
       </div>
     )
   }
-})
+}
 
-const App = React.createClass({
+class App extends React.Component {
   render() {
     return (
       <div>
@@ -59,6 +57,6 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 render(<App/>, document.getElementById('app'))

@@ -3,23 +3,23 @@ import CreateContactForm from './CreateContactForm'
 import { connect } from 'react-redux'
 import { addContact, loadContacts, deleteContact } from '../actions/contacts'
 
-const App = React.createClass({
-  propTypes: {
+class App extends React.Component {
+  static propTypes = {
     dispatch: PropTypes.func.isRequired,
     contacts: PropTypes.array.isRequired
-  },
+  };
 
   componentDidMount() {
     loadContacts(this.props.dispatch)
-  },
+  }
 
-  handleCreateContact(contact) {
+  handleCreateContact = contact => {
     this.props.dispatch(addContact(contact))
-  },
+  };
 
-  deleteContact(contact) {
+  deleteContact = contact => {
     deleteContact(this.props.dispatch, contact.id)
-  },
+  };
 
   render() {
     const { contacts, contactsWithErrors, contactsBeingDeleted } = this.props
@@ -47,7 +47,7 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default connect((state) => {
   return {

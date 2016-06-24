@@ -37,24 +37,22 @@ function readFilesFromEvent(event, cb) {
   }
 }
 
-const Droppable = React.createClass({
-  getInitialState() {
-    return {
-      acceptDrop: false,
-      files: null
-    }
-  },
+class Droppable extends React.Component {
+  state = {
+    acceptDrop: false,
+    files: null
+  };
 
-  handleDragOver(event) {
+  handleDragOver = event => {
     if (event.dataTransfer.types[0] === 'Files') {
       event.preventDefault()
       this.setState({
         acceptDrop: true
       })
     }
-  },
+  };
 
-  handleDrop(event) {
+  handleDrop = event => {
     event.stopPropagation()
     event.preventDefault()
     this.setState({
@@ -63,7 +61,7 @@ const Droppable = React.createClass({
     readFilesFromEvent(event, (files) => {
       this.setState({ files })
     })
-  },
+  };
 
   render() {
     const { acceptDrop, files } = this.state
@@ -85,6 +83,6 @@ const Droppable = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default Droppable

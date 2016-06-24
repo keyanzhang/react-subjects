@@ -13,14 +13,13 @@ const withMousePosition = () => {
 
 }
 
-const App = React.createClass({
-
-  propTypes: {
+class App extends React.Component {
+  static propTypes = {
     mouse: React.PropTypes.shape({
       x: React.PropTypes.number.isRequired,
       y: React.PropTypes.number.isRequired
     }).isRequired
-  },
+  };
 
   render() {
     return (
@@ -30,8 +29,7 @@ const App = React.createClass({
       </div>
     )
   }
-
-})
+}
 
 const AppWithMouse = withMousePosition(App)
 

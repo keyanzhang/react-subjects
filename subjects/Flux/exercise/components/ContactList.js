@@ -2,14 +2,15 @@ import React from 'react'
 import { getState, addChangeListener } from '../stores/ContactStore'
 import { loadContacts } from '../actions/ViewActionCreators'
 
-const ContactList = React.createClass({
-  getInitialState() {
-    return getState()
-  },
+class ContactList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = getState();
+  }
 
   componentDidMount() {
     loadContacts()
-  },
+  }
 
   render() {
     const { contacts, loaded } = this.state
@@ -31,6 +32,6 @@ const ContactList = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default ContactList
